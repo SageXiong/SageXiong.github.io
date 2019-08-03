@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta name="baidu-site-verification" content="UqlC4pwKIm">
+  <meta name="baidu-site-verification" content="d3U0dGeqGw">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="1C1XSuJ8TgM2O0mcZvsgzEdy0IdRZOJfxDYPyh18U9Q">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/zzx.jpg?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/zzx.jpg?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/zzx.jpg?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,sgin,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景&amp;emsp;&amp;emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。 什么是验签&amp;emsp;&amp;emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。 为什么要做加签验签&amp;emsp;&amp;emsp;做加签验签的目的主要目的就是，验证消息的完整性 如何做加签验签简单来说，发送消息方： 123根据消息内容形成摘">
+<meta name="keywords" content="java,sgin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务定义安全协议">
+<meta property="og:url" content="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/index.html">
+<meta property="og:site_name" content="sageXiong">
+<meta property="og:description" content="背景&amp;emsp;&amp;emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。 什么是验签&amp;emsp;&amp;emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。 为什么要做加签验签&amp;emsp;&amp;emsp;做加签验签的目的主要目的就是，验证消息的完整性 如何做加签验签简单来说，发送消息方： 123根据消息内容形成摘">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-03T02:05:55.916Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务定义安全协议">
+<meta name="twitter:description" content="背景&amp;emsp;&amp;emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。 什么是验签&amp;emsp;&amp;emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。 为什么要做加签验签&amp;emsp;&amp;emsp;做加签验签的目的主要目的就是，验证消息的完整性 如何做加签验签简单来说，发送消息方： 123根据消息内容形成摘">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/">
+
+
+
+
+
+  <title>微服务定义安全协议 | sageXiong</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-111723881-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7d6f1362a35cff34ba42ab3b2c8b3781";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sageXiong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">举杯幸会有缘人</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-count">
+          <a href="/count" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-address-book"></i> <br>
+            
+            琅琊榜
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sageXiong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sageXiong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">微服务定义安全协议</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T15:55:12+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-03T10:05:55+08:00">
+                2019-08-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/09/微服务/微服务定义安全协议/" class="leancloud_visitors" data-flag-title="微服务定义安全协议">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>&emsp;&emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。</p>
+<h2 id="什么是验签"><a href="#什么是验签" class="headerlink" title="什么是验签"></a>什么是验签</h2><p>&emsp;&emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。</p>
+<h2 id="为什么要做加签验签"><a href="#为什么要做加签验签" class="headerlink" title="为什么要做加签验签"></a>为什么要做加签验签</h2><p>&emsp;&emsp;做加签验签的目的主要目的就是，验证消息的完整性</p>
+<h2 id="如何做加签验签"><a href="#如何做加签验签" class="headerlink" title="如何做加签验签"></a>如何做加签验签</h2><p>简单来说，发送消息方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">根据消息内容形成摘要;</span><br><span class="line">根据摘要形成签名字段;</span><br><span class="line">发送消息;</span><br></pre></td></tr></table></figure>
+
+<p>接受消息方：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">接受消息;</span><br><span class="line">根据消息内容形成摘要;</span><br><span class="line">根据摘要去验证签名是否正确;</span><br></pre></td></tr></table></figure>
+
+<h2 id="详细思路"><a href="#详细思路" class="headerlink" title="详细思路"></a>详细思路</h2><p>&emsp;&emsp;结合我之前实现的过程，一共分了两种方式；<br></p>
+<h3 id="参考了支付宝的相关加签验签的方式"><a href="#参考了支付宝的相关加签验签的方式" class="headerlink" title="参考了支付宝的相关加签验签的方式"></a>参考了支付宝的相关加签验签的方式</h3><p>我在上面的基础上调整了一下<br><br>&emsp;&emsp;第一步：商户根据提供的工具类生成一组需要签名和验证的公钥、私钥，提供公钥给平台；<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成密钥对(公钥和私钥)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">genKeyPair</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(SIGN_TYPE_RSA);</span><br><span class="line">	keyPairGen.initialize(KEY_LENGTH);</span><br><span class="line">	KeyPair keyPair = keyPairGen.generateKeyPair();</span><br><span class="line">	RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();</span><br><span class="line">	RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();</span><br><span class="line">	Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(<span class="number">2</span>);</span><br><span class="line">	map.put(PUBLIC_KEY, publicKey);</span><br><span class="line">	map.put(PRIVATE_KEY, privateKey);</span><br><span class="line">	<span class="keyword">return</span> map;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步：同样平台也调用上面的方法生成一组需要签名和验证的公钥、私钥，提供公钥给商户；<br><br>第三步：生成sign签名的步骤：<br><br>&emsp;&emsp;平台将对数据里面的内容进行鉴权，确定携带的信息是真实、有效、合理的。因此，这里将定义生成 sign 字符串的方法。<br><br>&emsp;&emsp;a、对所有传入参数按照字段名的 ASCII 码从小到大排序（字典序）后，使用 URL 键值对的格式（即 key1=value1&amp;key2=value2…）拼接成字符串 string1，注意：值为空的参数不参与签名。<br><br>&emsp;&emsp;b、通过私钥对string 进行 RSA（256位） 运算，再将得到签名字符串。<br><br><font color="red">注意：支付公钥上传至收银台2.0平台，请使用私钥签名；参数为空不参数签名。</font><br><br>签名示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">假设以下为请求传入参数：</span><br><span class="line">&#123;</span><br><span class="line">	&quot;appId&quot;: &quot;micro90f99466b08c4c7&quot;,</span><br><span class="line">	&quot;attach&quot;: &quot;xxxx&quot;, //透传参数</span><br><span class="line">	&quot;merchantNo&quot;: &quot;9683091070339795&quot;,</span><br><span class="line">	&quot;nonceStr&quot;: &quot;pYDYeHqSPmMjWJFWHM9vhjowznvv8NQF&quot;, //随机数</span><br><span class="line">	&quot;notifyUrl&quot;: &quot;http://127.0.0.1:8080/notifyUnionPay/qrCode/callback/&quot;,</span><br><span class="line">	&quot;returnUrl&quot;: &quot;http://127.0.0.1:8080/trade/test/&quot;,</span><br><span class="line">	&quot;outOrderNo&quot;: &quot;10101201710250000007&quot;,</span><br><span class="line">	&quot;channelCode&quot; : &quot;unionpay_small_quick&quot;,</span><br><span class="line">	&quot;outTime&quot;: &quot;&quot;,</span><br><span class="line">	&quot;subject&quot;: &quot;iPhone 8&quot;,</span><br><span class="line">	&quot;signMode&quot;:&quot;RSA&quot;,</span><br><span class="line">	&quot;timeStamp&quot;: &quot;2019-10-24 11:05:42&quot;,</span><br><span class="line">	&quot;tradeTotalFee&quot;: &quot;1&quot;</span><br><span class="line">&#125;</span><br><span class="line">1：经过 a 过程 URL 键值对字典序排序后的字符串 string1 为: appId=micro90f99466b08c4c7&amp;attach=xxxx&amp;channelCode=unionpay_small_quick&amp;merchantNo=9683091070339795&amp;nonceStr=pYDYeHqSPmMjWJFWHM9vhjowznvv8NQF&amp;notifyUrl=http://127.0.0.1:8080/notifyUnionPay/qrCode/callback/&amp;outOrderNo=10101201710250000007&amp;returnUrl=http://127.0.0.1:8080/trade/test/&amp;signMode=RSA&amp;subject=iPhone 8&amp;timeStamp=2019-10-24 11:05:42&amp;tradeTotalFee=1</span><br><span class="line">2.经过 b 过程后得到 sign 为: Au2cAqKAgRAz+2uQzhxeTmfa/NYX7jEGojHl/4xG4fTnBsO5DTYkFi4Prq5ID0uiK76AUUjOjSmyRdfDIXBwpmhdXcpcF5IaEQ2Dnk2684SrJGMhAlbPKJGmwrww2okVhkv4ZPdXG06IoNTUf+fzCueTzkYal8RhsPCS5NBR9QJ2hidnaFgmTQFvn4eNb8GBjjFb7ixdGmLfIYfcc2HPckIXuvJjzLumtpnz/t1mjKELytOm+mw19GUnYZUkKh3deFD8OZW6CrjgYENW5TNqjHDr6k0ndf7CugJoKJ3uNZFLpQdhCvD1Zxsd9A9Zk1Q+PVOpkjX9uSg19DIN/BN4KQ==</span><br></pre></td></tr></table></figure>
+
+<p>排序的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 把数组所有元素排序，并按照“参数=参数值”的模式用“&amp;”字符拼接成字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> jsonData</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildSortJson</span><span class="params">(Map&lt;String, String&gt; dataMap)</span> </span>&#123;</span><br><span class="line">	StringBuffer sortSb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">	dataMap = paraFilter(dataMap);</span><br><span class="line">	List&lt;String&gt; jsonKeys = Lists.newArrayList();</span><br><span class="line">	<span class="keyword">for</span> (String key : dataMap.keySet()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!WebConstant.PARAM_SIGN.equals(key)) &#123;<span class="comment">//签名标识字段不参与签名</span></span><br><span class="line">			jsonKeys.add(key);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	Collections.sort(jsonKeys);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (String jsonKey : jsonKeys) &#123;</span><br><span class="line">		<span class="keyword">if</span> (sortSb.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			sortSb.append(GlobalConstant.STRING_AND_CHAR);</span><br><span class="line">		&#125;</span><br><span class="line">		sortSb.append(jsonKey).append(GlobalConstant.STRING_ASSIGN_CHAR).append(dataMap.get(jsonKey));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sortSb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>生成验签sign的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">rsa256Sign</span><span class="params">(String content, String privateKey)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//获取私钥对象</span></span><br><span class="line">		<span class="keyword">byte</span>[] keyBytes = Base64Utils.decodeFromString(privateKey);</span><br><span class="line">		PKCS8EncodedKeySpec pkcs8KeySpec = <span class="keyword">new</span> PKCS8EncodedKeySpec(keyBytes);</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(SIGN_TYPE_RSA);</span><br><span class="line">		PrivateKey priKey = keyFactory.generatePrivate(pkcs8KeySpec);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//SHA256WithRSA 加签</span></span><br><span class="line">		Signature signature = Signature.getInstance(SIGN_SHA256RSA_ALGORITHMS);</span><br><span class="line">		signature.initSign(priKey);</span><br><span class="line">		signature.update(content.getBytes(CHARSET_UTF8));</span><br><span class="line">		<span class="keyword">byte</span>[] signed = signature.sign();</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> String(Base64.encodeBase64(signed));</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		log.error(<span class="string">"rsa256Sign failure!RSAcontent: &#123;&#125;,sign: &#123;&#125;"</span>, content, e.getStackTrace());</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第四步：平台接收用户参数请求，使用商户提供的公钥进行验签；<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * SHA256WithRSA 验签</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> content</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sign</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> publicKey</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SystemException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">rsa256CheckContent</span><span class="params">(String content, String sign, </span></span></span><br><span class="line"><span class="function"><span class="params">    String publicKey)</span> <span class="keyword">throws</span> SystemException </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		log.info(<span class="string">"验签字符串: &#123;&#125;"</span>, content);</span><br><span class="line">		<span class="comment">//获取公钥对象</span></span><br><span class="line">		<span class="keyword">byte</span>[] keyBytes = Base64Utils.decodeFromString(publicKey);</span><br><span class="line">		X509EncodedKeySpec keySpec = <span class="keyword">new</span> X509EncodedKeySpec(keyBytes);</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(SIGN_TYPE_RSA);</span><br><span class="line">		PublicKey pubKey = keyFactory.generatePublic(keySpec);</span><br><span class="line">		<span class="comment">//SHA256WithRSA 验签</span></span><br><span class="line">		Signature signature = Signature.getInstance(SIGN_SHA256RSA_ALGORITHMS);</span><br><span class="line">		signature.initVerify(pubKey);</span><br><span class="line">		signature.update(content.getBytes(CHARSET_UTF8));</span><br><span class="line">		<span class="keyword">return</span> signature.verify(Base64.decodeBase64(sign.getBytes()));</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		log.error(<span class="string">"rsa256CheckContent failure!RSAcontent: &#123;&#125;,sign: &#123;&#125;"</span>, content, sign, e.getStackTrace());</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="微服务定义的验签方式"><a href="#微服务定义的验签方式" class="headerlink" title="微服务定义的验签方式"></a>微服务定义的验签方式</h3><h4 id="签名生成算法"><a href="#签名生成算法" class="headerlink" title="签名生成算法"></a>签名生成算法</h4><p>&emsp;&emsp;平台通过URL签名校验机制对每个不同的服务商渠道过来的请求进行鉴权，每个请求都需要进行签名校验。接口调用方需按以下签名生成步骤生成签名值sign，并作为请求参数传输给平台服务端。</p>
+<h4 id="签名生成步骤"><a href="#签名生成步骤" class="headerlink" title="签名生成步骤"></a>签名生成步骤</h4><p>&emsp;&emsp;每个商户都会分配一对clientId和clientSecret，发起请求时，clientId作为请求参数传输给服务端，clientSecret则作为URL签名算法的密钥使用。<br></p>
+<p>URL签名生成步骤如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.	将所有参数按参数名进行升序（a-z）排序，包括data和page里面的所有参数；</span><br><span class="line">2.	将排序后的参数名和值拼接成字符串stringParams，格式：key1value1key2value2…；</span><br><span class="line">3.	在上一步的字符串前面拼接上请求的URI，字符串后面拼接上clientSecret，即：URI + stringParams + clientSecret；</span><br><span class="line">4.	使用clientSecret作为密钥，对上一步的结果字符串使用HmacSHA256算法计算MAC值；</span><br><span class="line">5.	将上一步的计算结果进行BASE64编码，编码后的结果就是签名值sign。</span><br></pre></td></tr></table></figure>
+
+<h4 id="签名生成示例"><a href="#签名生成示例" class="headerlink" title="签名生成示例"></a>签名生成示例</h4><p>假设请求传输的参数如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"requestId"</span>: <span class="string">"aimaii1212u19283nfna"</span>,</span><br><span class="line">    <span class="attr">"version"</span> : <span class="string">"1.0"</span>,</span><br><span class="line">    <span class="attr">"timestamp"</span> : <span class="string">"1546926034000"</span>,</span><br><span class="line">    <span class="attr">"accessToken"</span>: <span class="string">"5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQM"</span>,</span><br><span class="line">    <span class="attr">"sign"</span> : <span class="string">"Whm0RAtVzSOlDkICGImwp8et7yEKtHU5N1NTI2nGrPc%3D"</span>,</span><br><span class="line">    <span class="attr">"appId"</span> : <span class="string">"micro33d5ac87242c463"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"status"</span>: <span class="string">"VALID"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"page"</span>:&#123;</span><br><span class="line">        <span class="attr">"currentPage"</span>:<span class="number">1</span>, </span><br><span class="line">        <span class="attr">"pageSize"</span>:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第1步：将所有参数按参数名进行升序排序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">accessToken: 5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQM</span><br><span class="line">appId: micro33d5ac87242c463</span><br><span class="line">currentPage: 1</span><br><span class="line">pageSize: 10</span><br><span class="line">requestId: aimaii1212u19283nfna</span><br><span class="line">status: VALID</span><br><span class="line">timestamp: 1546926034000</span><br><span class="line">version: 1.0</span><br></pre></td></tr></table></figure>
+
+<p>第2步：按格式key1value1key2value2…拼接以上参数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringParams = accessToken5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQMappIdmicro33d5ac87242c463currentPage1pageSize10requestIdaimaii1212u19283nfnastatusVALIDtimestamp1546926034000version1.0</span><br></pre></td></tr></table></figure>
+
+<p>第3步：拼接URI和appSecret，其中，URI = /micro/custom/listCustomers，密钥appSecret = 6ee57dae5eec472ca730e814f09669d7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringSignTemp = /micro/custom/listCustomersaccessToken5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQMappIdmicro33d5ac87242c463currentPage1pageSize10requestIdaimaii1212u19283nfnastatusVALIDtimestamp1546926034000version1.06ee57dae5eec472ca730e814f09669d7</span><br></pre></td></tr></table></figure>
+
+<p>第4步：计算MAC值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mac = hmacSHA256(appSecret, stringSignTemp)</span><br></pre></td></tr></table></figure>
+
+<p>第5步：BASE64编码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sign = base64(mac)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span><a href="/2019/01/09/微服务/微服务定义安全协议/">微服务定义安全协议</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 sageXiong 的个人博客">sageXiong</a></p>
+  <p><span>发布时间:</span>2019年01月09日 - 15:01</p>
+  <p><span>最后更新:</span>2019年08月03日 - 10:08</p>
+  <p><span>原始链接:</span><a href="/2019/01/09/微服务/微服务定义安全协议/" title="微服务定义安全协议">http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/sgin/" rel="tag"><i class="fa fa-tag"></i> sgin</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/26/2018-12-26-个人博客构建/" rel="next" title="个人博客构建">
+                <i class="fa fa-chevron-left"></i> 个人博客构建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTgzNC8xODM4MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="sageXiong">
+            
+              <p class="site-author-name" itemprop="name">sageXiong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>			
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/SageXiong" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:chang_chi_hung@163.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.jianshu.com/u/a03503a6bf56" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-rocket"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.weibo.com/" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sagexiong" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-bell"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.csdn.net/u011475210" title="CSDN博客主页" target="_blank">CSDN博客主页</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://sagexiong.github.io/" title="全球站主页" target="_blank">全球站主页</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是验签"><span class="nav-number">2.</span> <span class="nav-text">什么是验签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要做加签验签"><span class="nav-number">3.</span> <span class="nav-text">为什么要做加签验签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何做加签验签"><span class="nav-number">4.</span> <span class="nav-text">如何做加签验签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细思路"><span class="nav-number">5.</span> <span class="nav-text">详细思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考了支付宝的相关加签验签的方式"><span class="nav-number">5.1.</span> <span class="nav-text">参考了支付宝的相关加签验签的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务定义的验签方式"><span class="nav-number">5.2.</span> <span class="nav-text">微服务定义的验签方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#签名生成算法"><span class="nav-number">5.2.1.</span> <span class="nav-text">签名生成算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#签名生成步骤"><span class="nav-number">5.2.2.</span> <span class="nav-text">签名生成步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#签名生成示例"><span class="nav-number">5.2.3.</span> <span class="nav-text">签名生成示例</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sageXiong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+<!--
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a></div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("p2tw72XaLbwCDYrtosjdIVW9-gzGzoHsz", "UHaUjoUGaeuoLOvSdkyQIU0P");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.3"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.3"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/exturl.js?v=5.1.3"></script>
+
+
+  
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+</body>
+</html>
