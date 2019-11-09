@@ -123,7 +123,7 @@
 
 
 
-  <meta name="keywords" content="java,sgin,">
+  <meta name="keywords" content="java,并发,">
 
 
 
@@ -134,18 +134,20 @@
 
 
 
-<meta name="description" content="背景&amp;emsp;&amp;emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。 什么是验签&amp;emsp;&amp;emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。 为什么要做加签验签&amp;emsp;&amp;emsp;做加签验签的目的主要目的就是，验证消息的完整性 如何做加签验签简单来说，发送消息方： 123根据消息内容形成摘">
-<meta name="keywords" content="java,sgin">
+<meta name="description" content="前言&amp;emsp;&amp;emsp;随着硬件的驱动以及国内互联网行业的飞速发展，现在 64 核的服务器已经飞入寻常百姓家，大型互联网厂商的系统并发量轻松过百万，传统的中间件和数据库已经不能为我们遮风挡雨，反而成了瓶颈所在。于是，并发编程已经慢慢成为一项必备技能; 并发编程三大核心问题 分工：指的是如何高效地拆解任务并分配给线程； 同步：指线程之间的如何协作； 互斥：保证同一时刻只允许一个线程访问共享资源；">
+<meta name="keywords" content="java,并发">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微服务定义安全协议">
-<meta property="og:url" content="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/index.html">
+<meta property="og:title" content="并发编程的实践（一）">
+<meta property="og:url" content="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（一）/index.html">
 <meta property="og:site_name" content="sageXiong">
-<meta property="og:description" content="背景&amp;emsp;&amp;emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。 什么是验签&amp;emsp;&amp;emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。 为什么要做加签验签&amp;emsp;&amp;emsp;做加签验签的目的主要目的就是，验证消息的完整性 如何做加签验签简单来说，发送消息方： 123根据消息内容形成摘">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;随着硬件的驱动以及国内互联网行业的飞速发展，现在 64 核的服务器已经飞入寻常百姓家，大型互联网厂商的系统并发量轻松过百万，传统的中间件和数据库已经不能为我们遮风挡雨，反而成了瓶颈所在。于是，并发编程已经慢慢成为一项必备技能; 并发编程三大核心问题 分工：指的是如何高效地拆解任务并分配给线程； 同步：指线程之间的如何协作； 互斥：保证同一时刻只允许一个线程访问共享资源；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-03T02:05:55.916Z">
+<meta property="og:image" content="https://upload-blog.oss-cn-shenzhen.aliyuncs.com/upload/java/concurrent/panoramic.png">
+<meta property="og:updated_time" content="2019-11-09T03:23:37.565Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="微服务定义安全协议">
-<meta name="twitter:description" content="背景&amp;emsp;&amp;emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。 什么是验签&amp;emsp;&amp;emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。 为什么要做加签验签&amp;emsp;&amp;emsp;做加签验签的目的主要目的就是，验证消息的完整性 如何做加签验签简单来说，发送消息方： 123根据消息内容形成摘">
+<meta name="twitter:title" content="并发编程的实践（一）">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;随着硬件的驱动以及国内互联网行业的飞速发展，现在 64 核的服务器已经飞入寻常百姓家，大型互联网厂商的系统并发量轻松过百万，传统的中间件和数据库已经不能为我们遮风挡雨，反而成了瓶颈所在。于是，并发编程已经慢慢成为一项必备技能; 并发编程三大核心问题 分工：指的是如何高效地拆解任务并分配给线程； 同步：指线程之间的如何协作； 互斥：保证同一时刻只允许一个线程访问共享资源；">
+<meta name="twitter:image" content="https://upload-blog.oss-cn-shenzhen.aliyuncs.com/upload/java/concurrent/panoramic.png">
 
 
 
@@ -175,13 +177,13 @@
 
 
 
-  <link rel="canonical" href="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/">
+  <link rel="canonical" href="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（一）/">
 
 
 
 
 
-  <title>微服务定义安全协议 | sageXiong</title>
+  <title>并发编程的实践（一） | sageXiong</title>
   
 
 
@@ -379,7 +381,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/">
+    <link itemprop="mainEntityOfPage" href="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sageXiong">
@@ -396,7 +398,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">微服务定义安全协议</h2>
+          <h2 class="post-title" itemprop="name headline">并发编程的实践（一）</h2>
         
 
         <div class="post-meta">
@@ -408,8 +410,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T15:55:12+08:00">
-                2019-01-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-09T10:15:51+08:00">
+                2019-11-09
               </time>
             
 
@@ -424,8 +426,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-03T10:05:55+08:00">
-                2019-08-03
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-09T11:23:37+08:00">
+                2019-11-09
               </time>
             
           </span>
@@ -443,8 +445,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微服务/" itemprop="url" rel="index">
-                    <span itemprop="name">微服务</span>
+                  <a href="/categories/技术研究/" itemprop="url" rel="index">
+                    <span itemprop="name">技术研究</span>
                   </a>
                 </span>
 
@@ -460,7 +462,7 @@
 
           
           
-             <span id="/2019/01/09/微服务/微服务定义安全协议/" class="leancloud_visitors" data-flag-title="微服务定义安全协议">
+             <span id="/2019/11/09/并发编程/并发编程的实践（一）/" class="leancloud_visitors" data-flag-title="并发编程的实践（一）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -522,54 +524,21 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>&emsp;&emsp;目前市面上流行的微服务项目，都是以接口的形式对外提供服务，这样的话就需要对应的加签验签的功能，保证程序接口的安全性。</p>
-<h2 id="什么是验签"><a href="#什么是验签" class="headerlink" title="什么是验签"></a>什么是验签</h2><p>&emsp;&emsp;加签验签，发送消息方，对消息加签名；接受消息方，验证签名是否正确。</p>
-<h2 id="为什么要做加签验签"><a href="#为什么要做加签验签" class="headerlink" title="为什么要做加签验签"></a>为什么要做加签验签</h2><p>&emsp;&emsp;做加签验签的目的主要目的就是，验证消息的完整性</p>
-<h2 id="如何做加签验签"><a href="#如何做加签验签" class="headerlink" title="如何做加签验签"></a>如何做加签验签</h2><p>简单来说，发送消息方：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">根据消息内容形成摘要;</span><br><span class="line">根据摘要形成签名字段;</span><br><span class="line">发送消息;</span><br></pre></td></tr></table></figure>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;&emsp;随着硬件的驱动以及国内互联网行业的飞速发展，现在 64 核的服务器已经飞入寻常百姓家，大型互联网厂商的系统并发量轻松过百万，传统的中间件和数据库已经不能为我们遮风挡雨，反而成了瓶颈所在。于是，并发编程已经慢慢成为一项必备技能;</p>
+<h2 id="并发编程三大核心问题"><a href="#并发编程三大核心问题" class="headerlink" title="并发编程三大核心问题"></a>并发编程三大核心问题</h2><ul>
+<li><strong>分工</strong>：指的是如何高效地拆解任务并分配给线程；</li>
+<li><strong>同步</strong>：指线程之间的如何协作；</li>
+<li><strong>互斥</strong>：保证同一时刻只允许一个线程访问共享资源；</li>
+</ul>
+<p>&emsp;&emsp;其实在Java SDK 并发包很大部分内容都是按照这三个维度组织的，例如 Fork/Join 框架就是一种分工模式，CountDownLatch 就是一种典型的同步方式，而可重入锁则是一种互斥手段。</p>
+<h2 id="三大核心问题详解"><a href="#三大核心问题详解" class="headerlink" title="三大核心问题详解"></a>三大核心问题详解</h2><h3 id="分工"><a href="#分工" class="headerlink" title="分工"></a>分工</h3><p>&emsp;&emsp;所谓分工，类似于现实中一个组织完成一个项目，项目经理要拆分任务，安排合适的成员去完成。在并发编程领域，你就是项目经理，线程就是项目组成员。任务分解和分工对于项目成败非常关键，不过在并发领域里，分工更重要，它直接决定了并发程序的性能。<br><br>&emsp;&emsp;Java SDK 并发包里的 Executor、Fork/Join、Future 本质上都是一种分工方法。除此之外，并发编程领域还总结了一些设计模式，基本上都是和分工方法相关的，例如生产者 - 消费者、Thread-Per-Message、Worker Thread 模式等都是用来指导你如何分工的。<br><br>&emsp;&emsp;学习这部分内容，最佳的方式就是和现实世界做对比。例如生产者 - 消费者模式，可以类比一下餐馆里的大厨和服务员，大厨就是生产者，负责做菜，做完放到出菜口，而服务员就是消费者，把做好的菜给你端过来。不过，我们经常会发现，出菜口有时候一下子出了好几个菜，服务员是可以把这一批菜同时端给你的。其实这就是生产者 - 消费者模式的一个优点，生产者一个一个地生产数据，而消费者可以批处理，这样就提高了性能。</p>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>&emsp;&emsp;在并发编程领域里的同步，主要指的就是线程间的协作，本质上和现实生活中的协作没区别，不过是<strong>一个线程执行完了一个任务，如何通知执行后续任务的线程开工</strong>而已。<br><br>&emsp;&emsp;协作一般是和分工相关的。Java SDK 并发包里的 Executor、Fork/Join、Future 本质上都是分工方法，但同时也能解决线程协作的问题。除此之外，Java SDK 里提供的 CountDownLatch、CyclicBarrier、Phaser、Exchanger 也都是用来解决线程协作问题的。<br><br>&emsp;&emsp;工作中遇到的线程协作问题，基本上都可以描述为这样的一个问题：<strong>当某个条件不满足时，线程需要等待，当某个条件满足时，线程需要被唤醒执行</strong>。例如，在生产者 - 消费者模型里，也有类似的描述，“当队列满时，生产者线程等待，当队列不满时，生产者线程需要被唤醒执行；当队列空时，消费者线程等待，当队列不空时，消费者线程需要被唤醒执行。”<br><br>&emsp;&emsp; 在 Java 并发编程领域，解决协作问题的核心技术是管程。管程是一种解决并发问题的通用模型，除了能解决线程协作问题，还能解决下面我们将要介绍的互斥问题。可以这么说，<strong>管程是解决并发问题的万能钥匙</strong>。</p>
+<h3 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h3><p>&emsp;&emsp;分工、同步主要强调的是性能，但并发程序里还有一部分是关于正确性的，用专业术语叫“<strong>线程安全</strong>”。并发程序里，当多个线程同时访问同一个共享变量的时候，结果是不确定的。不确定，则意味着可能正确，也可能错误，事先是不知道的。解决线程安全问题的核心方案就是互斥。<br><br>&emsp;&emsp;<strong>所谓互斥，指的是同一时刻，只允许一个线程访问共享变量</strong>。<br><br>&emsp;&emsp;实现互斥的核心技术就是锁，Java 语言里 synchronized、SDK 里的各种 Lock 都能解决互斥问题。虽说锁解决了安全性问题，但同时也带来了性能问题，Java SDK 里提供的 ReadWriteLock、StampedLock 就可以优化读多写少场景下锁的性能。还可以使用无锁的数据结构，例如 Java SDK 里提供的原子类都是基于无锁技术实现的。<br></p>
+<h3 id="三者的联系"><a href="#三者的联系" class="headerlink" title="三者的联系"></a>三者的联系</h3><p>&emsp;&emsp;在程序开发的工程中，我们为了提高执行计算机任务的效率，保证CPU充分利用，将任务拆分交替执行。从而出现并发，而CPU多核增加了并行计算，就出现<strong>分工</strong>的问题。分工以后为了进一步提升效率和更加灵活地达到目的，需要我们对线程组织编排，线程之间需要通信，而操作系统提供一些让进程，线程之间的通信方式，也就出现了<strong>同步</strong>的问题。但是事情总是会不尽如人意，并发和通信带来的高性能的同时，也带来了多线程操作的导致的共享资源竞争的问题。于是乎，为了解决这一问题，又将对共享资源串行化。所以就出现了<strong>互斥</strong>。<br><br>&emsp;&emsp;综上，这一切均为提高性能的手段和对其所产生问题的解决方案。</p>
+<p><img src="https://upload-blog.oss-cn-shenzhen.aliyuncs.com/upload/java/concurrent/panoramic.png" alt="panoramic"></p>
+<center>并发编程全景图之思维导图</center>
 
-<p>接受消息方：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">接受消息;</span><br><span class="line">根据消息内容形成摘要;</span><br><span class="line">根据摘要去验证签名是否正确;</span><br></pre></td></tr></table></figure>
-
-<h2 id="详细思路"><a href="#详细思路" class="headerlink" title="详细思路"></a>详细思路</h2><p>&emsp;&emsp;结合我之前实现的过程，一共分了两种方式；<br></p>
-<h3 id="参考了支付宝的相关加签验签的方式"><a href="#参考了支付宝的相关加签验签的方式" class="headerlink" title="参考了支付宝的相关加签验签的方式"></a>参考了支付宝的相关加签验签的方式</h3><p>我在上面的基础上调整了一下<br><br>&emsp;&emsp;第一步：商户根据提供的工具类生成一组需要签名和验证的公钥、私钥，提供公钥给平台；<br></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成密钥对(公钥和私钥)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">genKeyPair</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(SIGN_TYPE_RSA);</span><br><span class="line">	keyPairGen.initialize(KEY_LENGTH);</span><br><span class="line">	KeyPair keyPair = keyPairGen.generateKeyPair();</span><br><span class="line">	RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();</span><br><span class="line">	RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();</span><br><span class="line">	Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(<span class="number">2</span>);</span><br><span class="line">	map.put(PUBLIC_KEY, publicKey);</span><br><span class="line">	map.put(PRIVATE_KEY, privateKey);</span><br><span class="line">	<span class="keyword">return</span> map;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第二步：同样平台也调用上面的方法生成一组需要签名和验证的公钥、私钥，提供公钥给商户；<br><br>第三步：生成sign签名的步骤：<br><br>&emsp;&emsp;平台将对数据里面的内容进行鉴权，确定携带的信息是真实、有效、合理的。因此，这里将定义生成 sign 字符串的方法。<br><br>&emsp;&emsp;a、对所有传入参数按照字段名的 ASCII 码从小到大排序（字典序）后，使用 URL 键值对的格式（即 key1=value1&amp;key2=value2…）拼接成字符串 string1，注意：值为空的参数不参与签名。<br><br>&emsp;&emsp;b、通过私钥对string 进行 RSA（256位） 运算，再将得到签名字符串。<br><br><font color="red">注意：支付公钥上传至收银台2.0平台，请使用私钥签名；参数为空不参数签名。</font><br><br>签名示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">假设以下为请求传入参数：</span><br><span class="line">&#123;</span><br><span class="line">	&quot;appId&quot;: &quot;micro90f99466b08c4c7&quot;,</span><br><span class="line">	&quot;attach&quot;: &quot;xxxx&quot;, //透传参数</span><br><span class="line">	&quot;merchantNo&quot;: &quot;9683091070339795&quot;,</span><br><span class="line">	&quot;nonceStr&quot;: &quot;pYDYeHqSPmMjWJFWHM9vhjowznvv8NQF&quot;, //随机数</span><br><span class="line">	&quot;notifyUrl&quot;: &quot;http://127.0.0.1:8080/notifyUnionPay/qrCode/callback/&quot;,</span><br><span class="line">	&quot;returnUrl&quot;: &quot;http://127.0.0.1:8080/trade/test/&quot;,</span><br><span class="line">	&quot;outOrderNo&quot;: &quot;10101201710250000007&quot;,</span><br><span class="line">	&quot;channelCode&quot; : &quot;unionpay_small_quick&quot;,</span><br><span class="line">	&quot;outTime&quot;: &quot;&quot;,</span><br><span class="line">	&quot;subject&quot;: &quot;iPhone 8&quot;,</span><br><span class="line">	&quot;signMode&quot;:&quot;RSA&quot;,</span><br><span class="line">	&quot;timeStamp&quot;: &quot;2019-10-24 11:05:42&quot;,</span><br><span class="line">	&quot;tradeTotalFee&quot;: &quot;1&quot;</span><br><span class="line">&#125;</span><br><span class="line">1：经过 a 过程 URL 键值对字典序排序后的字符串 string1 为: appId=micro90f99466b08c4c7&amp;attach=xxxx&amp;channelCode=unionpay_small_quick&amp;merchantNo=9683091070339795&amp;nonceStr=pYDYeHqSPmMjWJFWHM9vhjowznvv8NQF&amp;notifyUrl=http://127.0.0.1:8080/notifyUnionPay/qrCode/callback/&amp;outOrderNo=10101201710250000007&amp;returnUrl=http://127.0.0.1:8080/trade/test/&amp;signMode=RSA&amp;subject=iPhone 8&amp;timeStamp=2019-10-24 11:05:42&amp;tradeTotalFee=1</span><br><span class="line">2.经过 b 过程后得到 sign 为: Au2cAqKAgRAz+2uQzhxeTmfa/NYX7jEGojHl/4xG4fTnBsO5DTYkFi4Prq5ID0uiK76AUUjOjSmyRdfDIXBwpmhdXcpcF5IaEQ2Dnk2684SrJGMhAlbPKJGmwrww2okVhkv4ZPdXG06IoNTUf+fzCueTzkYal8RhsPCS5NBR9QJ2hidnaFgmTQFvn4eNb8GBjjFb7ixdGmLfIYfcc2HPckIXuvJjzLumtpnz/t1mjKELytOm+mw19GUnYZUkKh3deFD8OZW6CrjgYENW5TNqjHDr6k0ndf7CugJoKJ3uNZFLpQdhCvD1Zxsd9A9Zk1Q+PVOpkjX9uSg19DIN/BN4KQ==</span><br></pre></td></tr></table></figure>
-
-<p>排序的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 把数组所有元素排序，并按照“参数=参数值”的模式用“&amp;”字符拼接成字符串</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> jsonData</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">buildSortJson</span><span class="params">(Map&lt;String, String&gt; dataMap)</span> </span>&#123;</span><br><span class="line">	StringBuffer sortSb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">	dataMap = paraFilter(dataMap);</span><br><span class="line">	List&lt;String&gt; jsonKeys = Lists.newArrayList();</span><br><span class="line">	<span class="keyword">for</span> (String key : dataMap.keySet()) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!WebConstant.PARAM_SIGN.equals(key)) &#123;<span class="comment">//签名标识字段不参与签名</span></span><br><span class="line">			jsonKeys.add(key);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	Collections.sort(jsonKeys);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (String jsonKey : jsonKeys) &#123;</span><br><span class="line">		<span class="keyword">if</span> (sortSb.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">			sortSb.append(GlobalConstant.STRING_AND_CHAR);</span><br><span class="line">		&#125;</span><br><span class="line">		sortSb.append(jsonKey).append(GlobalConstant.STRING_ASSIGN_CHAR).append(dataMap.get(jsonKey));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sortSb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>生成验签sign的代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">rsa256Sign</span><span class="params">(String content, String privateKey)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="comment">//获取私钥对象</span></span><br><span class="line">		<span class="keyword">byte</span>[] keyBytes = Base64Utils.decodeFromString(privateKey);</span><br><span class="line">		PKCS8EncodedKeySpec pkcs8KeySpec = <span class="keyword">new</span> PKCS8EncodedKeySpec(keyBytes);</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(SIGN_TYPE_RSA);</span><br><span class="line">		PrivateKey priKey = keyFactory.generatePrivate(pkcs8KeySpec);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//SHA256WithRSA 加签</span></span><br><span class="line">		Signature signature = Signature.getInstance(SIGN_SHA256RSA_ALGORITHMS);</span><br><span class="line">		signature.initSign(priKey);</span><br><span class="line">		signature.update(content.getBytes(CHARSET_UTF8));</span><br><span class="line">		<span class="keyword">byte</span>[] signed = signature.sign();</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> String(Base64.encodeBase64(signed));</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		log.error(<span class="string">"rsa256Sign failure!RSAcontent: &#123;&#125;,sign: &#123;&#125;"</span>, content, e.getStackTrace());</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第四步：平台接收用户参数请求，使用商户提供的公钥进行验签；<br></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * SHA256WithRSA 验签</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> content</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> sign</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> publicKey</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> SystemException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">rsa256CheckContent</span><span class="params">(String content, String sign, </span></span></span><br><span class="line"><span class="function"><span class="params">    String publicKey)</span> <span class="keyword">throws</span> SystemException </span>&#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		log.info(<span class="string">"验签字符串: &#123;&#125;"</span>, content);</span><br><span class="line">		<span class="comment">//获取公钥对象</span></span><br><span class="line">		<span class="keyword">byte</span>[] keyBytes = Base64Utils.decodeFromString(publicKey);</span><br><span class="line">		X509EncodedKeySpec keySpec = <span class="keyword">new</span> X509EncodedKeySpec(keyBytes);</span><br><span class="line">		KeyFactory keyFactory = KeyFactory.getInstance(SIGN_TYPE_RSA);</span><br><span class="line">		PublicKey pubKey = keyFactory.generatePublic(keySpec);</span><br><span class="line">		<span class="comment">//SHA256WithRSA 验签</span></span><br><span class="line">		Signature signature = Signature.getInstance(SIGN_SHA256RSA_ALGORITHMS);</span><br><span class="line">		signature.initVerify(pubKey);</span><br><span class="line">		signature.update(content.getBytes(CHARSET_UTF8));</span><br><span class="line">		<span class="keyword">return</span> signature.verify(Base64.decodeBase64(sign.getBytes()));</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		log.error(<span class="string">"rsa256CheckContent failure!RSAcontent: &#123;&#125;,sign: &#123;&#125;"</span>, content, sign, e.getStackTrace());</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="微服务定义的验签方式"><a href="#微服务定义的验签方式" class="headerlink" title="微服务定义的验签方式"></a>微服务定义的验签方式</h3><h4 id="签名生成算法"><a href="#签名生成算法" class="headerlink" title="签名生成算法"></a>签名生成算法</h4><p>&emsp;&emsp;平台通过URL签名校验机制对每个不同的服务商渠道过来的请求进行鉴权，每个请求都需要进行签名校验。接口调用方需按以下签名生成步骤生成签名值sign，并作为请求参数传输给平台服务端。</p>
-<h4 id="签名生成步骤"><a href="#签名生成步骤" class="headerlink" title="签名生成步骤"></a>签名生成步骤</h4><p>&emsp;&emsp;每个商户都会分配一对clientId和clientSecret，发起请求时，clientId作为请求参数传输给服务端，clientSecret则作为URL签名算法的密钥使用。<br></p>
-<p>URL签名生成步骤如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.	将所有参数按参数名进行升序（a-z）排序，包括data和page里面的所有参数；</span><br><span class="line">2.	将排序后的参数名和值拼接成字符串stringParams，格式：key1value1key2value2…；</span><br><span class="line">3.	在上一步的字符串前面拼接上请求的URI，字符串后面拼接上clientSecret，即：URI + stringParams + clientSecret；</span><br><span class="line">4.	使用clientSecret作为密钥，对上一步的结果字符串使用HmacSHA256算法计算MAC值；</span><br><span class="line">5.	将上一步的计算结果进行BASE64编码，编码后的结果就是签名值sign。</span><br></pre></td></tr></table></figure>
-
-<h4 id="签名生成示例"><a href="#签名生成示例" class="headerlink" title="签名生成示例"></a>签名生成示例</h4><p>假设请求传输的参数如下：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"requestId"</span>: <span class="string">"aimaii1212u19283nfna"</span>,</span><br><span class="line">    <span class="attr">"version"</span> : <span class="string">"1.0"</span>,</span><br><span class="line">    <span class="attr">"timestamp"</span> : <span class="string">"1546926034000"</span>,</span><br><span class="line">    <span class="attr">"accessToken"</span>: <span class="string">"5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQM"</span>,</span><br><span class="line">    <span class="attr">"sign"</span> : <span class="string">"Whm0RAtVzSOlDkICGImwp8et7yEKtHU5N1NTI2nGrPc%3D"</span>,</span><br><span class="line">    <span class="attr">"appId"</span> : <span class="string">"micro33d5ac87242c463"</span>,</span><br><span class="line">    <span class="attr">"data"</span>: &#123;</span><br><span class="line">        <span class="attr">"status"</span>: <span class="string">"VALID"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"page"</span>:&#123;</span><br><span class="line">        <span class="attr">"currentPage"</span>:<span class="number">1</span>, </span><br><span class="line">        <span class="attr">"pageSize"</span>:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第1步：将所有参数按参数名进行升序排序如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">accessToken: 5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQM</span><br><span class="line">appId: micro33d5ac87242c463</span><br><span class="line">currentPage: 1</span><br><span class="line">pageSize: 10</span><br><span class="line">requestId: aimaii1212u19283nfna</span><br><span class="line">status: VALID</span><br><span class="line">timestamp: 1546926034000</span><br><span class="line">version: 1.0</span><br></pre></td></tr></table></figure>
-
-<p>第2步：按格式key1value1key2value2…拼接以上参数如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringParams = accessToken5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQMappIdmicro33d5ac87242c463currentPage1pageSize10requestIdaimaii1212u19283nfnastatusVALIDtimestamp1546926034000version1.0</span><br></pre></td></tr></table></figure>
-
-<p>第3步：拼接URI和appSecret，其中，URI = /micro/custom/listCustomers，密钥appSecret = 6ee57dae5eec472ca730e814f09669d7</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringSignTemp = /micro/custom/listCustomersaccessToken5DQ1ECZCBIRGCLSE6TOTK6Z90MULXKQMappIdmicro33d5ac87242c463currentPage1pageSize10requestIdaimaii1212u19283nfnastatusVALIDtimestamp1546926034000version1.06ee57dae5eec472ca730e814f09669d7</span><br></pre></td></tr></table></figure>
-
-<p>第4步：计算MAC值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mac = hmacSHA256(appSecret, stringSignTemp)</span><br></pre></td></tr></table></figure>
-
-<p>第5步：BASE64编码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sign = base64(mac)</span><br></pre></td></tr></table></figure>
-
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p>极客时间 -&gt; Java并发编程实战</p>
 
       
     </div>
@@ -586,12 +555,12 @@
   <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-  <p><span>本文标题:</span><a href="/2019/01/09/微服务/微服务定义安全协议/">微服务定义安全协议</a></p>
+  <p><span>本文标题:</span><a href="/2019/11/09/并发编程/并发编程的实践（一）/">并发编程的实践（一）</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 sageXiong 的个人博客">sageXiong</a></p>
-  <p><span>发布时间:</span>2019年01月09日 - 15:01</p>
-  <p><span>最后更新:</span>2019年08月03日 - 10:08</p>
-  <p><span>原始链接:</span><a href="/2019/01/09/微服务/微服务定义安全协议/" title="微服务定义安全协议">http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://sagexiong.site/2019/01/09/微服务/微服务定义安全协议/" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年11月09日 - 10:11</p>
+  <p><span>最后更新:</span>2019年11月09日 - 11:11</p>
+  <p><span>原始链接:</span><a href="/2019/11/09/并发编程/并发编程的实践（一）/" title="并发编程的实践（一）">http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（一）/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（一）/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -623,7 +592,7 @@
           
             <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
           
-            <a href="/tags/sgin/" rel="tag"><i class="fa fa-tag"></i> sgin</a>
+            <a href="/tags/并发/" rel="tag"><i class="fa fa-tag"></i> 并发</a>
           
         </div>
       
@@ -651,8 +620,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/26/2018-12-26-个人博客构建/" rel="next" title="个人博客构建">
-                <i class="fa fa-chevron-left"></i> 个人博客构建
+              <a href="/2019/01/09/微服务/微服务定义安全协议/" rel="next" title="微服务定义安全协议">
+                <i class="fa fa-chevron-left"></i> 微服务定义安全协议
               </a>
             
           </div>
@@ -660,10 +629,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/09/并发编程/并发编程的实践（一）/" rel="prev" title="并发编程的实践（一）">
-                并发编程的实践（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -866,7 +831,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是验签"><span class="nav-number">2.</span> <span class="nav-text">什么是验签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要做加签验签"><span class="nav-number">3.</span> <span class="nav-text">为什么要做加签验签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何做加签验签"><span class="nav-number">4.</span> <span class="nav-text">如何做加签验签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细思路"><span class="nav-number">5.</span> <span class="nav-text">详细思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考了支付宝的相关加签验签的方式"><span class="nav-number">5.1.</span> <span class="nav-text">参考了支付宝的相关加签验签的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务定义的验签方式"><span class="nav-number">5.2.</span> <span class="nav-text">微服务定义的验签方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#签名生成算法"><span class="nav-number">5.2.1.</span> <span class="nav-text">签名生成算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#签名生成步骤"><span class="nav-number">5.2.2.</span> <span class="nav-text">签名生成步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#签名生成示例"><span class="nav-number">5.2.3.</span> <span class="nav-text">签名生成示例</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发编程三大核心问题"><span class="nav-number">2.</span> <span class="nav-text">并发编程三大核心问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三大核心问题详解"><span class="nav-number">3.</span> <span class="nav-text">三大核心问题详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分工"><span class="nav-number">3.1.</span> <span class="nav-text">分工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步"><span class="nav-number">3.2.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互斥"><span class="nav-number">3.3.</span> <span class="nav-text">互斥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三者的联系"><span class="nav-number">3.4.</span> <span class="nav-text">三者的联系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">4.</span> <span class="nav-text">参考：</span></a></li></ol></div>
             
 
           </div>
