@@ -123,7 +123,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="java,并发,">
 
 
 
@@ -134,16 +134,18 @@
 
 
 
-<meta name="description" content="一只热爱技术的文艺青年">
-<meta property="og:type" content="website">
-<meta property="og:title" content="sageXiong">
-<meta property="og:url" content="http://sagexiong.site/archives/2019/index.html">
+<meta name="description" content="前言&amp;emsp;&amp;emsp;这些年，我们的 CPU、内存、I/O 设备都在不断迭代，不断朝着更快的方向努力。但是，在这个快速发展的过程中，有一个核心矛盾一直存在，就是这三者的速度差异。程序里大部分语句都要访问内存，有些还要访问 I/O，根据木桶理论（一只水桶能装多少水取决于它最短的那块木板），程序整体的性能取决于最慢的操作——读写 I/O 设备，也就是说单方面提高 CPU 性能是无效的。 解决三者">
+<meta name="keywords" content="java,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发编程的实践（二）">
+<meta property="og:url" content="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（二）/index.html">
 <meta property="og:site_name" content="sageXiong">
-<meta property="og:description" content="一只热爱技术的文艺青年">
+<meta property="og:description" content="前言&amp;emsp;&amp;emsp;这些年，我们的 CPU、内存、I/O 设备都在不断迭代，不断朝着更快的方向努力。但是，在这个快速发展的过程中，有一个核心矛盾一直存在，就是这三者的速度差异。程序里大部分语句都要访问内存，有些还要访问 I/O，根据木桶理论（一只水桶能装多少水取决于它最短的那块木板），程序整体的性能取决于最慢的操作——读写 I/O 设备，也就是说单方面提高 CPU 性能是无效的。 解决三者">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-12T15:05:32.054Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sageXiong">
-<meta name="twitter:description" content="一只热爱技术的文艺青年">
+<meta name="twitter:title" content="并发编程的实践（二）">
+<meta name="twitter:description" content="前言&amp;emsp;&amp;emsp;这些年，我们的 CPU、内存、I/O 设备都在不断迭代，不断朝着更快的方向努力。但是，在这个快速发展的过程中，有一个核心矛盾一直存在，就是这三者的速度差异。程序里大部分语句都要访问内存，有些还要访问 I/O，根据木桶理论（一只水桶能装多少水取决于它最短的那块木板），程序整体的性能取决于最慢的操作——读写 I/O 设备，也就是说单方面提高 CPU 性能是无效的。 解决三者">
 
 
 
@@ -173,13 +175,13 @@
 
 
 
-  <link rel="canonical" href="http://sagexiong.site/archives/2019/">
+  <link rel="canonical" href="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（二）/">
 
 
 
 
 
-  <title>归档 | sageXiong</title>
+  <title>并发编程的实践（二） | sageXiong</title>
   
 
 
@@ -217,7 +219,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -363,142 +365,307 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sageXiong">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sageXiong">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h2 class="post-title" itemprop="name headline">并发编程的实践（二）</h2>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-09T16:52:49+08:00">
+                2019-11-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-11-12T23:05:32+08:00">
+                2019-11-12
+              </time>
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 4 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术研究/" itemprop="url" rel="index">
+                    <span itemprop="name">技术研究</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/11/09/并发编程/并发编程的实践（二）/" class="leancloud_visitors" data-flag-title="并发编程的实践（二）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp;&emsp;这些年，我们的 CPU、内存、I/O 设备都在不断迭代，不断朝着更快的方向努力。但是，在这个快速发展的过程中，有一个<strong>核心矛盾一直存在，就是这三者的速度差异</strong>。程序里大部分语句都要访问内存，有些还要访问 I/O，根据木桶理论（一只水桶能装多少水取决于它最短的那块木板），程序整体的性能取决于最慢的操作——读写 I/O 设备，也就是说单方面提高 CPU 性能是无效的。</p>
+<h2 id="解决三者的速度差异（硬件上）"><a href="#解决三者的速度差异（硬件上）" class="headerlink" title="解决三者的速度差异（硬件上）"></a>解决三者的速度差异（硬件上）</h2><p>&emsp;&emsp;为了合理利用 CPU 的高性能，平衡这三者的速度差异，计算机体系结构、操作系统、编译程序都做出了贡献，主要体现为：</p>
+<ul>
+<li>CPU 增加了缓存，以均衡与内存的速度差异；</li>
+<li>操作系统增加了进程、线程，以分时复用 CPU，进而均衡 CPU 与 I/O 设备的速度差异；</li>
+<li>编译程序优化指令执行次序，使得缓存能够得到更加合理地利用。</li>
+</ul>
+<h2 id="引申的问题"><a href="#引申的问题" class="headerlink" title="引申的问题"></a>引申的问题</h2><h3 id="源头之一：缓存导致的可见性问题"><a href="#源头之一：缓存导致的可见性问题" class="headerlink" title="源头之一：缓存导致的可见性问题"></a>源头之一：缓存导致的可见性问题</h3><p>&emsp;&emsp;所谓可见性，指的是<strong>一个线程对共享变量的修改，另外一个线程能够立刻看到</strong>。<br><br>&emsp;&emsp;硬件造成的可见性问题指的是在多核时代，每颗 CPU 都有自己的缓存，这时 CPU 缓存与内存的数据一致性就没那么容易解决了，当多个线程在不同的 CPU 上执行时，这些线程操作的是不同的 CPU 缓存。<br><br>&emsp;&emsp;假设有2个CPU，线程 A 操作的是 CPU-1 上的缓存，而线程 B 操作的是 CPU-2 上的缓存，很明显，这个时候线程 A 对变量 V 的操作对于线程 B 而言就不具备可见性了。这个就属于硬件程序员给软件程序员挖的“坑”。<br></p>
+<h3 id="源头之二：线程切换带来的原子性问题"><a href="#源头之二：线程切换带来的原子性问题" class="headerlink" title="源头之二：线程切换带来的原子性问题"></a>源头之二：线程切换带来的原子性问题</h3><p>&emsp;&emsp;<strong>我们把一个或者多个操作在 CPU 执行的过程中不被中断的特性称为原子性</strong>。CPU 能保证的原子操作是 <strong>CPU 指令级别</strong>的，而不是高级语言的操作符，这是违背我们直觉的地方。因此，很多时候我们需要在高级语言层面保证操作的原子性。<br><br>&emsp;&emsp;在早期操作系统上，我们通过多进程切换时间片的方式实现了边听歌边写代码。而现代的操作系统都基于更轻量的线程来调度，现在我们提到的“任务切换”都是指“线程切换”。<br></p>
+<h3 id="源头之三：编译优化带来的有序性问题"><a href="#源头之三：编译优化带来的有序性问题" class="headerlink" title="源头之三：编译优化带来的有序性问题"></a>源头之三：编译优化带来的有序性问题</h3><p>&emsp;&emsp;有序性。顾名思义，<strong>有序性指的是程序按照代码的先后顺序执行</strong>。编译器为了优化性能，有时候会改变程序中语句的先后顺序，例如程序中：“a=6；b=7；”，编译器优化后可能变成“b=7；a=6；”，在这个例子中，编译器调整了语句的顺序，但是不影响程序的最终结果。不过有时候编译器及解释器的优化可能导致意想不到的 Bug。<br></p>
+<h2 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h2><p>&emsp;&emsp;其实缓存、线程、编译优化的目的和我们写并发程序的目的是相同的，都是提高程序性能。而<strong>缓存导致的可见性问题，线程切换带来的原子性问题，编译优化带来的有序性问题</strong>。是并发编程领域不可忽视的问题。</p>
+<h3 id="解决可见性和有序性"><a href="#解决可见性和有序性" class="headerlink" title="解决可见性和有序性"></a>解决可见性和有序性</h3><p>&emsp;&emsp;导致可见性的原因是缓存，导致有序性的原因是编译优化，那解决可见性、有序性最直接的办法就是禁用缓存和编译优化，但是这样问题虽然解决了，我们程序的性能可就堪忧了。<br><br>&emsp;&emsp;合理的方案应该是<strong>按需禁用缓存以及编译优化</strong>。而Java内存模型就是为了解决这个问题，Java 内存模型是个很复杂的规范，本质上可以理解为，Java 内存模型规范了 JVM 如何提供按需禁用缓存和编译优化的方法。具体来说，这些方法包括 <strong>volatile</strong>、<strong>synchronized</strong> 和 <strong>final</strong> 三个关键字，以及六项 <strong>Happens-Before</strong> 规则。</p>
+<h4 id="Happens-Before-规则"><a href="#Happens-Before-规则" class="headerlink" title="Happens-Before 规则"></a>Happens-Before 规则</h4><p>&emsp;&emsp;表达的是：<strong>前面一个操作的结果对后续操作是可见的</strong>。就像有心灵感应的两个人，虽然远隔千里，一个人心之所想，另一个人都看得到。Happens-Before 规则就是要保证线程之间的这种“心灵感应”。所以比较正式的说法是：Happens-Before 约束了编译器的优化行为，虽允许编译器优化，但是要求编译器优化后一定遵守 Happens-Before 规则。</p>
+<h5 id="一、程序的顺序性规则"><a href="#一、程序的顺序性规则" class="headerlink" title="一、程序的顺序性规则"></a>一、程序的顺序性规则</h5><p>&emsp;&emsp;这条规则是指在一个线程中，按照程序顺序，前面的操作 Happens-Before 于后续的任意操作。这还是比较容易理解的，比如下面这段示例代码，按照程序的顺序，第 6 行代码 “x = 42;” Happens-Before 于第 7 行代码 “v = true;”，这就是规则 1 的内容，也比较符合单线程里面的思维：程序前面对某个变量的修改一定是对后续操作可见的。</p>
+<h5 id="二、volatile-变量规则"><a href="#二、volatile-变量规则" class="headerlink" title="二、volatile 变量规则"></a>二、volatile 变量规则</h5><p>&emsp;&emsp;这条规则是指对一个 volatile 变量的写操作， Happens-Before 于后续对这个 volatile 变量的读操作。</p>
+<h5 id="三、传递性规则"><a href="#三、传递性规则" class="headerlink" title="三、传递性规则"></a>三、传递性规则</h5><p>&emsp;&emsp;这条规则是指如果 A Happens-Before B，且 B Happens-Before C，那么 A Happens-Before C。<br></p>
+<h5 id="四、管程中锁的规则"><a href="#四、管程中锁的规则" class="headerlink" title="四、管程中锁的规则"></a>四、管程中锁的规则</h5><p>&emsp;&emsp;这条规则是指对一个锁的解锁 Happens-Before 于后续对这个锁的加锁。要理解这个规则，就首先要了解“管程指的是什么”。管程是一种通用的同步原语，在 Java 中指的就是 synchronized，synchronized 是 Java 里对管程的实现。<br></p>
+<h5 id="五、线程-start-规则"><a href="#五、线程-start-规则" class="headerlink" title="五、线程 start() 规则"></a>五、线程 start() 规则</h5><p>&emsp;&emsp;这条是关于线程启动的。它是指主线程 A 启动子线程 B 后，子线程 B 能够看到主线程 A 在启动子线程 B 前的操作。<br>&emsp;&emsp;换句话说就是，如果线程 A 调用线程 B 的 start() 方法（即在线程 A 中启动线程 B），那么该 start() 操作 Happens-Before 于线程 B 中的任意操作。</p>
+<h5 id="六、线程-join-规则"><a href="#六、线程-join-规则" class="headerlink" title="六、线程 join() 规则"></a>六、线程 join() 规则</h5><p>&emsp;&emsp;这条是关于线程等待的。它是指主线程 A 等待子线程 B 完成（主线程 A 通过调用子线程 B 的 join() 方法实现），当子线程 B 完成后（主线程 A 中 join() 方法返回），主线程能够看到子线程的操作。当然所谓的“看到”，指的是对共享变量的操作。<br><br>&emsp;&emsp;换句话说就是，如果在线程 A 中，调用线程 B 的 join() 并成功返回，那么线程 B 中的任意操作 Happens-Before 于该 join() 操作的返回。</p>
+<h5 id="七、线程中断规则"><a href="#七、线程中断规则" class="headerlink" title="七、线程中断规则"></a>七、线程中断规则</h5><p>&emsp;&emsp;对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生，可以通过Thread.interrupted()方法检测到是否有中断发生。</p>
+<h5 id="八、对象终结规则"><a href="#八、对象终结规则" class="headerlink" title="八、对象终结规则"></a>八、对象终结规则</h5><p>&emsp;&emsp;一个对象的初始化完成(构造函数执行结束)先行发生于它的finalize()方法的开始。</p>
+<h4 id="volatile、final"><a href="#volatile、final" class="headerlink" title="volatile、final"></a>volatile、final</h4><h5 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h5><p>&emsp;&emsp;最原始的意义就是禁用 CPU 缓存。<br></p>
+<h5 id="final"><a href="#final" class="headerlink" title="final"></a>final</h5><p>&emsp;&emsp;final 修饰变量时，初衷是告诉编译器：这个变量生而不变，可以可劲儿优化。</p>
+<h3 id="解决原子性"><a href="#解决原子性" class="headerlink" title="解决原子性"></a>解决原子性</h3><p>&emsp;&emsp;一个或者多个操作在 CPU 执行的过程中不被中断的特性，称为“原子性”。<br><br>&emsp;&emsp;“<strong>同一时刻只有一个线程执行</strong>”这个条件非常重要，我们称之为<strong>互斥</strong>。如果我们能够保证对共享变量的修改是互斥的，那么，无论是单核 CPU 还是多核 CPU，就都能保证原子性了。</p>
+<h4 id="Java-语言提供的锁技术：synchronized"><a href="#Java-语言提供的锁技术：synchronized" class="headerlink" title="Java 语言提供的锁技术：synchronized"></a>Java 语言提供的锁技术：synchronized</h4><p>&emsp;&emsp;锁是一种通用的技术方案，Java 语言提供的 synchronized 关键字，就是锁的一种实现。synchronized 关键字可以用来修饰方法，也可以用来修饰代码块，它的使用示例基本上都是下面这个样子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 修饰非静态方法</span></span><br><span class="line">  <span class="function"><span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 临界区</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 修饰静态方法</span></span><br><span class="line">  <span class="function"><span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 临界区</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 修饰代码块</span></span><br><span class="line">  Object obj = <span class="keyword">new</span> Object()；</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">baz</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span>(obj) &#123;</span><br><span class="line">      <span class="comment">// 临界区</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>极客时间 -&gt; Java并发编程实战 01到04章的内容</p>
+
+      
+    </div>
+    
+    
+    
+
+    <div>
+      
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span><a href="/2019/11/09/并发编程/并发编程的实践（二）/">并发编程的实践（二）</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 sageXiong 的个人博客">sageXiong</a></p>
+  <p><span>发布时间:</span>2019年11月09日 - 16:11</p>
+  <p><span>最后更新:</span>2019年11月12日 - 23:11</p>
+  <p><span>原始链接:</span><a href="/2019/11/09/并发编程/并发编程的实践（二）/" title="并发编程的实践（二）">http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（二）/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://sagexiong.site/2019/11/09/并发编程/并发编程的实践（二）/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          
+            <a href="/tags/并发/" rel="tag"><i class="fa fa-tag"></i> 并发</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
         
+
         
 
         
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2019">2019</h2>
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
           </div>
         
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/09/并发编程/并发编程的实践（二）/" itemprop="url">
-              
-                <span itemprop="name">并发编程的实践（二）</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-11-09T16:52:49+08:00" content="2019-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        </div>
+      
       
 
-        
-        
-        
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/09/并发编程/并发编程的实践（一）/" rel="next" title="并发编程的实践（一）">
+                <i class="fa fa-chevron-left"></i> 并发编程的实践（一）
+              </a>
+            
+          </div>
 
-        
-        
+          <span class="post-nav-divider"></span>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/09/并发编程/并发编程的实践（一）/" itemprop="url">
-              
-                <span itemprop="name">并发编程的实践（一）</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-11-09T10:15:51+08:00" content="2019-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2019/01/09/微服务/微服务定义安全协议/" itemprop="url">
-              
-                <span itemprop="name">微服务定义安全协议</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-01-09T15:55:12+08:00" content="2019-01-09">
-          01-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-    </div>
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -506,6 +673,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTgzNC8xODM4MA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -528,8 +704,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -647,6 +832,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决三者的速度差异（硬件上）"><span class="nav-number">2.</span> <span class="nav-text">解决三者的速度差异（硬件上）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引申的问题"><span class="nav-number">3.</span> <span class="nav-text">引申的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源头之一：缓存导致的可见性问题"><span class="nav-number">3.1.</span> <span class="nav-text">源头之一：缓存导致的可见性问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源头之二：线程切换带来的原子性问题"><span class="nav-number">3.2.</span> <span class="nav-text">源头之二：线程切换带来的原子性问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源头之三：编译优化带来的有序性问题"><span class="nav-number">3.3.</span> <span class="nav-text">源头之三：编译优化带来的有序性问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何解决"><span class="nav-number">4.</span> <span class="nav-text">如何解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决可见性和有序性"><span class="nav-number">4.1.</span> <span class="nav-text">解决可见性和有序性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Happens-Before-规则"><span class="nav-number">4.1.1.</span> <span class="nav-text">Happens-Before 规则</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、程序的顺序性规则"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">一、程序的顺序性规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、volatile-变量规则"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">二、volatile 变量规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、传递性规则"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">三、传递性规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、管程中锁的规则"><span class="nav-number">4.1.1.4.</span> <span class="nav-text">四、管程中锁的规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五、线程-start-规则"><span class="nav-number">4.1.1.5.</span> <span class="nav-text">五、线程 start() 规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#六、线程-join-规则"><span class="nav-number">4.1.1.6.</span> <span class="nav-text">六、线程 join() 规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#七、线程中断规则"><span class="nav-number">4.1.1.7.</span> <span class="nav-text">七、线程中断规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#八、对象终结规则"><span class="nav-number">4.1.1.8.</span> <span class="nav-text">八、对象终结规则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile、final"><span class="nav-number">4.1.2.</span> <span class="nav-text">volatile、final</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#volatile"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#final"><span class="nav-number">4.1.2.2.</span> <span class="nav-text">final</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决原子性"><span class="nav-number">4.2.</span> <span class="nav-text">解决原子性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-语言提供的锁技术：synchronized"><span class="nav-number">4.2.1.</span> <span class="nav-text">Java 语言提供的锁技术：synchronized</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -794,6 +995,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -823,6 +1028,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
@@ -1301,26 +1517,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
   
 
 
